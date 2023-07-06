@@ -6,6 +6,7 @@ const connection =require("./db")
 const userRoutes =require("./routes/users");
 const authRoutes =require("./routes/auth");
 const suggestionRoutes = require('./routes/suggestionRoutes');
+const cartRoutes = require('./routes/cartRoutes');
 //database connection
 connection();
 
@@ -17,6 +18,7 @@ app.use(cors());
 app.use("/api/users",userRoutes);
 app.use("/api/auth",authRoutes);
 app.use('/api', suggestionRoutes);
+
 
 
 const port =process.env.PORT|| 3000;
