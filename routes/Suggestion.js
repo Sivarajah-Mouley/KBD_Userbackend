@@ -5,7 +5,7 @@ const {
     getSuggestions
    
  
-} = require("../controller/Suggestion");
+} = require("../Controllers/Suggestion");
 
 router.get("/", getSuggestions);
 router.post("/add", addSuggestions);

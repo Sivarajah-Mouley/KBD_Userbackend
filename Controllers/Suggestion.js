@@ -2,37 +2,40 @@ const Suggestions = require("../models/Suggestion");
 
 const getSuggestions = async (req, res) => {
   try {
-    const suggestions = await Suggestions.find({});
-    res.json(suggestions);
+    const employee = await Suggestions.find({});
+    res.json(employee);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });
   }
 };
-
-const addSuggestion = async (req, res) => {
+const addSuggestions = async (req, res) => {
   try {
-    if (!req.body.suggestion) {
-      res.status(400).send({ message: "Suggestion Box Cannot Be Empty!" });
+    console.log(req.body);
+    if (!req.body.suggest) {
+      res.status(400).send({ message: "Content can not be empty!" });
       return;
     }
-
-    const suggestion = new Suggestions({
-      suggestion: req.body.suggestion,
+    const employee = new Suggestions({
+        suggest: req.body.suggest,
     });
-
-    const savedSuggestion = await suggestion.save();
-    res.status(201).send(savedSuggestion);
+    employee
+      .save(employee)
+      .then((data) => {
+        res.send(data);
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while creating the employee.",
+        });
+      });
   } catch (err) {
-    console.log(err);
-    res.status(500).send({
-      message:
-        err.message || "There is an error occurred while creating the suggestion.",
-    });
+    console.log("err");
   }
 };
 
 module.exports = {
   getSuggestions,
-  addSuggestion,
+  addSuggestions,
 };
