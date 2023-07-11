@@ -1,8 +1,8 @@
 const User = require('../models/User')
-const {verifyToken} = require('../Helpers/helper')
+const {verifyToken} = require('../utils/utility.function')
 
 const sendResponseError = (statusCode, msg, res) => {
-  res.status(statusCode || 400).send(!!msg ? msg : 'Input is invalid!!')
+  res.status(statusCode || 400).send(!!msg ? msg : 'Invalid input !!')
 }
 
 const verifyUser = async (req, res, next) => {
@@ -25,7 +25,7 @@ const verifyUser = async (req, res, next) => {
 
       next()
     } else {
-      sendResponseError(400, `You are not authorizeed`, res)
+      sendResponseError(400, `you are not authorizeed`, res)
     }
   } catch (err) {
     console.log('Error ', err)

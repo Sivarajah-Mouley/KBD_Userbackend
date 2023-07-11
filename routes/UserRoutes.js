@@ -3,8 +3,8 @@ const {
   signUpUser,
   signInUser,
   getUser,
-} = require('../Controllers/User')
-const {verifyUser} = require('../Middleware/middleware')
+} = require('../controller/user.controller')
+const {verifyUser} = require('../middleware/middleware')
 const router = express.Router()
 
 router.post('/signup', signUpUser)

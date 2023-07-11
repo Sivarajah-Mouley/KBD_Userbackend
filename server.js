@@ -1,10 +1,10 @@
 require("dotenv").config();
 const express = require("express");
-const userRoutes = require("./routes/UserRoutes");
-const cartRoutes = require("./routes/Cart");
-const suggestions = require("./routes/Suggestion")
+const userRoutes = require("./routes/userRoutes");
+const cartRoutes = require("./routes/cartRoutes");
+const suggestions = require("./routes/suggestions")
 
-const { connectDB } = require("./Configurations/db");
+const { connectDB } = require("./config/db");
 const cors = require("cors");
 
 connectDB();
@@ -23,6 +23,5 @@ app.use("/api/suggestions", suggestions);
 app.use("/api/user", userRoutes);
 app.use("/api/cart", cartRoutes);
 
-
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
