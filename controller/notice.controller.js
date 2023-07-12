@@ -1,8 +1,9 @@
-const Notice = require("../models/notice");
-const getNotices = async (req, res) => {
+const Employee = require("../models/notice");
+
+const getNotice = async (req, res) => {
   try {
-    const notices = await Notice.find({});
-    res.json(notices);
+    const employee = await Employee.find({});
+    res.json(employee);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });
@@ -15,27 +16,29 @@ const addNotice = async (req, res) => {
       res.status(400).send({ message: "Content can not be empty!" });
       return;
     }
-    const notice = new Notice({
+
+    const employee = new Employee({
       audiance: req.body.audiance,
       type: req.body.type,
       details: req.body.details,
     });
-    notice
-      .save(notice)
+    employee
+      .save(employee)
       .then((data) => {
         res.send(data);
       })
       .catch((err) => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while creating the notice.",
+            err.message || "Some error occurred while creating the employee.",
         });
       });
   } catch (err) {
     console.log("err");
   }
 };
+
 module.exports = {
-  getNotices,
+  getNotice,
   addNotice,
 };
