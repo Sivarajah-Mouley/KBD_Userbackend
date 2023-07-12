@@ -21,6 +21,7 @@ const addProduct = async (req, res) => {
       description: req.body.description,
       price: req.body.price,
       catagory: req.body.catagory,
+      countInStock: req.body.countInStock,
       imageUrl: req.body.imageUrl,
       Nprice: req.body.Nprice,
     });
@@ -32,7 +33,7 @@ const addProduct = async (req, res) => {
       .catch((err) => {
         res.status(500).send({
           message:
-            err.message || "undefined error occured",
+            err.message || "Some error occurred while creating the product.",
         });
       });
   } catch (err) {
@@ -46,7 +47,7 @@ const deleteProduct = (req, res) => {
     .then((data) => {
       if (!data) {
         res.status(404).send({
-          message: ` product not found!`,
+          message: `Cannot delete product with id=${id}. Maybe product was not found!`,
         });
       } else {
         res.send({
@@ -84,7 +85,7 @@ const updateProduct = async (req, res) => {
     .then((data) => {
       if (!data) {
         res.status(404).send({
-          message: `product was not found!`,
+          message: `Cannot update product with id=${id}. Maybe product was not found!`,
         });
       } else res.send({ message: "product was updated successfully." });
     })
