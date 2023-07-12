@@ -1,8 +1,27 @@
-const express = require('express');
+require("dotenv").config();
+const express = require("express");
+const userRoutes = require("./routes/userRoutes");
+const cartRoutes = require("./routes/cartRoutes");
+const suggestions = require("./routes/suggestions")
+
+const { connectDB } = require("./config/db");
+const cors = require("cors");
+
+connectDB();
+
 const app = express();
 
-const port = 3000; // Replace with the desired port number
+app.use(express.json());
+app.use(cors());
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+app.get("/", (req, res) => {
+  res.json({ message: "API running..." });
 });
+
+
+app.use("/api/suggestions", suggestions);
+app.use("/api/user", userRoutes);
+app.use("/api/cart", cartRoutes);
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
